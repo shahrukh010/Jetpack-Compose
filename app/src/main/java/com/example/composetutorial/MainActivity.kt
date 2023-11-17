@@ -65,9 +65,13 @@ fun MyApp() {
                 )
             )
             Spacer(modifier = Modifier.height(130.dp))
-            CreateCircle(moneyCounter = moneyCounter.value) {
+            CreateCircle(moneyCounter = moneyCounter.value) { newValue ->
 
-                moneyCounter.value = it + 1;
+                moneyCounter.value = newValue;
+            }
+
+            if (moneyCounter.value > 25) {
+                Text(text = "Lots of money")
             }
         }
     }
@@ -84,7 +88,8 @@ fun CreateCircle(moneyCounter: Int = 0, updateMoneyCounter: (Int) -> Unit) {
             .padding(3.dp)
             .size(100.dp)
             .clickable {
-                updateMoneyCounter(moneyCounter);
+
+                updateMoneyCounter(moneyCounter + 1);
 //                moneyCounter.value += 1;
                 Log.d("TAG", "${moneyCounter}")
             },
@@ -93,7 +98,8 @@ fun CreateCircle(moneyCounter: Int = 0, updateMoneyCounter: (Int) -> Unit) {
     ) {
         Box(contentAlignment = Alignment.Center) {
 
-            Text(text = "Tap${moneyCounter}", modifier = Modifier)
+            // Text(text = "Tap${moneyCounter}", modifier = Modifier)
+            Text(text = "Tap", modifier = Modifier)
         }
 
     }
